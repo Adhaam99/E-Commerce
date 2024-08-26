@@ -11,6 +11,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { authGuard } from './core/guards/auth.guard';
+import { logedGuard } from './core/guards/loged.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -18,6 +20,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivate:[logedGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
 
@@ -30,6 +33,7 @@ export const routes: Routes = [
   {
     path: '',
     component: BlankLayoutComponent,
+    canActivate:[authGuard],
     children: [
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },

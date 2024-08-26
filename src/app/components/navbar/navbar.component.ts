@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FlowbiteService } from '../../core/services/flowbite.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
