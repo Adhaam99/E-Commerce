@@ -10,8 +10,13 @@ export class ProductsService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  getProducts= ():Observable<any> =>{
+  getProducts = ():Observable<any> => {
 
-    return this._HttpClient.get(baseUrl+"api/v1/products")
+    return this._HttpClient.get(`${baseUrl}api/v1/products`)
+  }
+
+  getSpecificProduct = (id:string | null):Observable<any> => {
+
+    return this._HttpClient.get(`${baseUrl}api/v1/products/${id}`)
   }
 }

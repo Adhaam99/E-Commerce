@@ -69,25 +69,46 @@
                     </ul>
                 </li>
                 <li>
-                    <a routerLink="wishlist" class="block py-2 px-3 relative  text-gray-500" aria-current="page">
-                        <div
-                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-red-600 rounded-full -top-2 -end-2 ">
-                            9</div>
-                        Wishlist<i class="fa-regular fa-heart"></i>
+                    <a routerLink="wishlist" routerLinkActive="active-link"  class="block py-2 px-3 relative  text-gray-500" aria-current="page">
+                       
+                        
+                        @if (wishlistData) {
+                            @if (wishlistData.length) {
+                                <div
+                                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-red-600 rounded-full -top-2 -end-2 ">
+                                
+                                    {{wishlistData.length}}
+                                
+                            </div>
+                            }
+                         } 
+                        Wishlist <i class=" fa-heart" [ngClass]="{
+                            'fa-regular':wishlistData  == null,
+                            'fa-solid' : wishlistData
+                        }"></i>
                     </a>
 
                 </li>
                 <li>
-                    <a routerLink="cart" class="block relative py-2 px-3 text-gray-500" aria-current="page">
-                        <div
+                    <a routerLink="cart" routerLinkActive="active-link" class="block relative py-2 px-3 text-gray-500" aria-current="page">
+                     @if (cartData) {
+                        @if (cartData.products.length) {
+                            <div
                             class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-red-600 rounded-full -top-2 -end-2 ">
-                            3</div>
-                        Cart<i class="fa-solid fa-cart-shopping"></i>
+                            
+                                {{cartData.products.length}}
+                            
+                        </div>
+                        }
+                     }   
+                    
+                       
+                        Cart <i class="fa-solid fa-cart-shopping"></i>
                     </a>
 
                 </li>
                 <li>
-                    <a routerLink="logOut" class="block py-2 px-3  text-gray-500" aria-current="page">LogOut</a>
+                    <a role="button"  class="block py-2 px-3  text-gray-500"  (click)="_AuthService.logOut() "  >LogOut</a>
                 </li>
 
             </ul>

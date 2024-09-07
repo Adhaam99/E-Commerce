@@ -1,5 +1,5 @@
-export interface Product {
-     
+export interface ProductDetails {
+
   sold: number;
   images: string[];
   subcategory: Subcategory[];
@@ -16,6 +16,8 @@ export interface Product {
   ratingsAverage: number;
   createdAt: string;
   updatedAt: string;
+  __v: number;
+  reviews: any[];
   id: string;
 }
 
@@ -32,5 +34,4 @@ interface Subcategory {
   slug: string;
   category: string;
 }
-
 

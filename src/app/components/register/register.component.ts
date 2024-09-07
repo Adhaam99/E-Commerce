@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -12,6 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -20,10 +21,11 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   errorMsg: string = '';
   successMsg: string = '';
   isLoading: boolean = false;
+  registerApi!:Subscription;
 
   private readonly _AuthService = inject(AuthService);
   private readonly _FormBuilder = inject(FormBuilder);
@@ -51,9 +53,8 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.isLoading = true;
 
-      this._AuthService.signUp(this.registerForm.value).subscribe({
+     this.registerApi = this._AuthService.signUp(this.registerForm.value).subscribe({
         next: (res) => {
-          console.log(res);
 
           if (res.message === 'success') {
             this.successMsg = res.message;
@@ -78,5 +79,9 @@ export class RegisterComponent {
       this.registerForm.setErrors({ mismatch: true });
       this.registerForm.markAllAsTouched();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.registerApi?.unsubscribe()
   }
 }

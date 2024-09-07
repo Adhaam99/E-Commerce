@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BrandsService } from '../../core/services/brands.service';
 import { Brands } from '../../core/interfaces/brands';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-brands',
@@ -9,17 +10,16 @@ import { Brands } from '../../core/interfaces/brands';
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss',
 })
-export class BrandsComponent implements OnInit {
-  
-  allBrands:Brands[]=[];
+export class BrandsComponent implements OnInit, OnDestroy {
+  allBrands: Brands[] = [];
+  getAllBrands!: Subscription;
 
   constructor(private _BrandsService: BrandsService) {}
 
   getBrands = (): void => {
-    this._BrandsService.getBrands().subscribe({
+    this.getAllBrands = this._BrandsService.getBrands().subscribe({
       next: (res) => {
-        console.log(res.data);
-        this.allBrands=res.data;
+        this.allBrands = res.data;
       },
       error: (err) => {
         console.log(err);
@@ -27,7 +27,11 @@ export class BrandsComponent implements OnInit {
     });
   };
 
-  ngOnInit(): void { 
-    this.getBrands()
+  ngOnInit(): void {
+    this.getBrands();
+  }
+
+  ngOnDestroy(): void {
+    this.getAllBrands?.unsubscribe();
   }
 }

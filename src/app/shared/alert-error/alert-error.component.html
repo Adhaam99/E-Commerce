@@ -19,8 +19,28 @@
             <li>Email must be valid</li>
 
         }@else if (formName.get(controlName)?.getError('pattern')) {
+
+            <ul>
+
+                @if (controlName=='phone') {
+                    
+                    <li>Phone is Incorrect </li>
+
+                }@else if (controlName=='password') {
+
+                    <li>Password must at least 6 characters </li>
+
+                }@else if (controlName=='city') {
+
+                    <li>City Name must at least 3 characters</li>
+
+                }@else if (controlName=='code') {
+
+                    <li>Code must be 6 characters</li>
+
+                }
+            </ul>
     
-            <li>Password must at least 6 characters </li>
 
         }
        

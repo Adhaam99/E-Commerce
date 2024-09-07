@@ -45,15 +45,21 @@
         <p class="text-lg text-red-600 my-3"> {{errorMsg}} </p>
         }
 
-        <button [disabled]="loginForm.invalid || isLoading" type="submit" class="btn-main mt-4 ms-auto block">
+        <div class="flex items-center justify-end space-x-3 mt-4">
 
-            Register
+            <a routerLink="/forgot" class="cursor-pointer text-blue-700">Forgot Password ?</a>
 
-            @if (isLoading) {
+            <button [disabled]="loginForm.invalid || isLoading" type="submit" class="btn-main ">
 
-            <i class="fas fa-spin fa-spinner"></i>
-            }
+                Register
+    
+                @if (isLoading) {
+    
+                <i class="fas fa-spin fa-spinner"></i>
+                }
+    
+            </button>
 
-        </button>
+        </div>
     </form>
 </section>

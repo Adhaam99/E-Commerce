@@ -1,5 +1,4 @@
-export interface Product {
-     
+export interface IWishProduct {
   sold: number;
   images: string[];
   subcategory: Subcategory[];
@@ -10,12 +9,14 @@ export interface Product {
   description: string;
   quantity: number;
   price: number;
+  priceAfterDiscount: number;
   imageCover: string;
   category: Category;
   brand: Category;
   ratingsAverage: number;
   createdAt: string;
   updatedAt: string;
+  __v: number;
   id: string;
 }
 
@@ -32,5 +33,3 @@ interface Subcategory {
   slug: string;
   category: string;
 }
-
-

@@ -10,7 +10,11 @@ export class CategoriesService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  getCategories= ():Observable<any>=>{
-    return this._HttpClient.get(baseUrl+'api/v1/categories')
+  getCategories = ():Observable<any>=>{
+    return this._HttpClient.get(`${baseUrl}api/v1/categories`)
+  }
+
+  getSpecificCategorey = (categoryId:string):Observable<any>=>{
+    return this._HttpClient.get(`${baseUrl}api/v1/categories/${categoryId}`)
   }
 }

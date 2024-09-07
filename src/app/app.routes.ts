@@ -13,6 +13,10 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { authGuard } from './core/guards/auth.guard';
 import { logedGuard } from './core/guards/loged.guard';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -27,6 +31,9 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent,title:'SignIn' },
 
       { path: 'register', component: RegisterComponent,title:'SignUp' },
+
+      { path: 'forgot', component: ForgotPasswordComponent,title:'Backup Password' },
+
     ],
   },
 
@@ -43,6 +50,12 @@ export const routes: Routes = [
       { path: 'categories', component: CategoriesComponent,title:'Categories' },
       { path:'wishlist',component:WishlistComponent,title:'Wishlist'},
       { path: 'cart', component: CartComponent,title:'Cart' },
+      { path: 'details/:id', component: ProductDetailsComponent,title:'Details' },
+      { path: 'allOrders', component: AllOrdersComponent,title:'All Orders' },
+      { path: 'orders/:id', component: OrdersComponent,title:' Orders' },
+
+
+
 
     ],
   },
