@@ -1,24 +1,25 @@
 @if(productDetails){
 
 <section>
-<h1 class="text-center text-main font-medium text-[42px]">Product Details</h1>
+    <h1 class="text-center text-main font-medium text-[42px]">Product Details</h1>
     <div class="flex max-md:flex-wrap space-x-6 items-center ">
         <div class="w-full md:w-4/12 max-md:mb-3">
             <div class="my-3">
 
                 <owl-carousel-o [options]="customOptionsImg">
-        
+
                     @for (img of productDetails.images; track $index) {
-        
+
                     <ng-template carouselSlide>
                         <div>
-                            <img [src]="img" class="w-full h-[15.625rem]" class="w-full" [alt]="productDetails.slug">
+                            <img [src]="img" class="w-full h-[400px] block"  [alt]="productDetails.slug">
                         </div>
                     </ng-template>
                     }
-        
+
                 </owl-carousel-o>
-            </div>        </div>
+            </div>
+        </div>
 
         <div class="w-full md:w-8/12">
             <h2 class="text-[2rem] font-medium">{{productDetails.title}}</h2>
@@ -42,7 +43,7 @@
                     {{productDetails.ratingsAverage}}</span>
             </div>
 
-            <button class="btn-main mt-3 w-full"> + Add To Cart</button>
+            <button class="btn-main mt-3 w-full" (click)="addProductToCart(productDetails.id)"> + Add To Cart</button>
 
         </div>
     </div>

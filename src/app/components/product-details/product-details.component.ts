@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { ProductsService } from '../../core/services/products.service';
 import { ProductDetails } from '../../core/interfaces/product-details';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -14,13 +16,19 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
+  addProductToCartApi!:Subscription;
+
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _ProductsService = inject(ProductsService);
+  private readonly  _CartService = inject(CartService)
+  private readonly  _ToastrService = inject(ToastrService)
+
 
   productIdSub!: Subscription;
   productDetails: ProductDetails | null = null;
 
   customOptionsImg: OwlOptions = {
+    rtl:true,
     loop: true,
     mouseDrag: true,
     touchDrag: true,
@@ -54,11 +62,24 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  addProductToCart = (id: string) => {
+    this.addProductToCartApi = this._CartService.addToCart(id).subscribe({
+      next: (res) => {
+        this._CartService.cartCounter.next(res.numOfCartItems);
+        this._ToastrService.success('Product Added Successfully');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  };
+
   ngOnInit(): void {
     this.getProductId();
   }
 
   ngOnDestroy(): void {
-    this.productIdSub.unsubscribe();
+    this.productIdSub?.unsubscribe();
+    this.addProductToCartApi?.unsubscribe();
   }
 }

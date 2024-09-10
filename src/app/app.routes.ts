@@ -17,6 +17,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { SubCategoryComponent } from './components/sub-category/sub-category.component';
+import { SubBrandComponent } from './components/sub-brand/sub-brand.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -53,9 +55,8 @@ export const routes: Routes = [
       { path: 'details/:id', component: ProductDetailsComponent,title:'Details' },
       { path: 'allOrders', component: AllOrdersComponent,title:'All Orders' },
       { path: 'orders/:id', component: OrdersComponent,title:' Orders' },
-
-
-
+      { path: 'subCategory/:id', component: SubCategoryComponent,title:' Category ' },
+      { path: 'subBrand/:id', component: SubBrandComponent,title:' Brand ' },
 
     ],
   },

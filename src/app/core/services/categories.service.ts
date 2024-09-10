@@ -14,7 +14,7 @@ export class CategoriesService {
     return this._HttpClient.get(`${baseUrl}api/v1/categories`)
   }
 
-  getSpecificCategorey = (categoryId:string):Observable<any>=>{
-    return this._HttpClient.get(`${baseUrl}api/v1/categories/${categoryId}`)
+  getSpecificCategorey = (categoryId:string | null):Observable<any>=>{
+    return this._HttpClient.get(`${baseUrl}api/v1/products?category[in]=${categoryId}`)
   }
 }

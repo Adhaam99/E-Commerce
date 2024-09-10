@@ -28,6 +28,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.isLoading = false;
         this.wishlistData = res.data;
+        this._WishlistService.wishListCounter.next(res.data.length)
       },
       error: (err) => {
         this.isLoading = false;
@@ -54,6 +55,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
     this.addProductToCartApi = this._CartService.addToCart(id).subscribe({
       next: (res) => {
         this.getUserWishlist();
+        this._CartService.cartCounter.next(res.numOfCartItems)
         this._ToastrService.success('Product Added to Cart');
       },
       error: (err) => {
